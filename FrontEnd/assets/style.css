@@ -128,6 +128,7 @@ li:hover {
 .gallery {
 	width: 100%;
 	display: grid;
+	padding-top: 51px;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
@@ -186,3 +187,36 @@ footer nav ul {
 	margin: 2em
 }
 
+
+
+/* Filter */
+.filtres {
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: row;
+	justify-content: center;
+}
+.flt-box {
+    margin-left: 10px;
+}
+.flt-btn {
+    
+    background-color: white;
+    border: #1D6154 1px solid;
+    border-radius: 25px;
+    padding: 4px 19px 4px 19px;
+    height: 37px;
+	cursor: pointer;
+}
+.flt-btn-text {
+	color: #1D6154;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+}
+.flt-btn:hover {
+    background-color: #1D6154;
+}
+.flt-btn:hover .flt-btn-text {
+    color: white;
+}
