@@ -11,17 +11,31 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+<div class="box-edit edit-mode">
+	<div class="text">
+		<img src="./assets/icons/edit.png" alt="">
+		<p>Mode édition</p>
+	</div>
+</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li>
+				<a href="./index.html" class="active">Projets</a>
+			</li>
+			<li>
+				<a href="#contact">Contact</a>
+			</li>
+			<li>
+				<a id="sign" href="./login.html">Login</a>
+			</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
+
+
 <main>
 	<section id="introduction">
 		<figure>
@@ -35,25 +49,29 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="project">
+			<h2>Mes Projets</h2>
+			<img src="./assets/icons/edite.png" alt="Edit" class="edit-mode">
+			<span class="edit-mode" onclick="openModal('edit')">modifier</span>
+		</div>
 		<div class="filtres">
 			<div class="flt-box">
-				<button class="flt-btn" onclick="filterWorks(0)">
+				<button id="all" class="flt-btn flt-active" onclick="filterWorks(0, 'all')">
 					<span class="flt-btn-text">
 						Tous
 					</span>
 				</button>
-				<button class="flt-btn" onclick="filterWorks(1)">
+				<button id="obj" class="flt-btn" onclick="filterWorks(1, 'obj')">
 					<span class="flt-btn-text">
 						Objets
 					</span>
 				</button>
-				<button class="flt-btn" onclick="filterWorks(2)">
+				<button id="apt" class="flt-btn" onclick="filterWorks(2, 'apt')">
 					<span class="flt-btn-text">
 						Appartements
 					</span>
 				</button>
-				<button class="flt-btn" onclick="filterWorks(3)">
+				<button id="hr" class="flt-btn" onclick="filterWorks(3, 'hr')">
 					<span class="flt-btn-text">
 						Hotels & restaurants
 					</span>
@@ -85,6 +103,59 @@
 	</nav>
 </footer>
 
+<dialog id="edit">
+	<button onclick="window.edit.close();" aria-label="close" class="x">❌</button>
+	<h2>Galerie photo</h2>
+	<p id="return_delete"></p>
+	<div id="container-edit"></div>
+	<div class="seperator"></div>
+	<div class="modal-footer">
+		<button onclick="openModal('add'); window.edit.close()">
+			Ajouter une photo
+		</button>
+	</div>
+</dialog>
+
+<dialog id="create">
+	<button onclick="window.create.close();window.edit.close();" aria-label="close" class="x">❌</button>
+	<img src="./assets/icons/back.png" onclick="window.create.close();openModal('edit')" class="bck">
+	<h2>Ajout photo</h2>
+	<p id="return_add"></p>
+	<form id="form-create" action="#" method="post" enctype="multipart/form-data">
+			
+		<div class="box-image">
+				<img src="./assets/icons/img.png" alt="Image">
+				<label id="btn-photo" for="file">
+					<span>+ Ajouter photo</span>
+					<input type="file" id="file" accept="image/png, image/jpg" required>
+				</label>
+				<p id="text-img">jpg, png : 4mo max</p>
+			</div>
+		</div>
+
+		<div id="preview" class="box-preview" onclick="resetImage()">
+			<img id="img-preview" src="./assets/images/appartement-paris-xviii.png" alt="Image">
+		</div>
+		
+		<div class="form-cors">
+			<label class="title-label" for="title">Titre</label>
+			<input type="text" name="title" id="title" class="form-input" required>
+		</div>
+		<div class="form-cors">
+			<label class="title-label" for="categorie">Catégorie</label>
+			<select name="categorie" id="categorie" class="form-input" type="text" required></select>
+		</div>
+		<div class="seperator"></div>
+		<div class="modal-footer">
+			<button type="submit" id="btn-add" disabled>
+				Valider
+			</button>
+		</div>
+
+	</form>
+
+
+</dialog>
 <script src="./assets/js/main.js" defer></script>
 </body>
 </html>

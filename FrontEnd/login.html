@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+<header>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="./index.html">Projets</a>
+            </li>
+            <li>
+                <a href="./index.html#contact">Contact</a>
+            </li>
+            <li>
+                <a href="./login.html" class="active">Login</a>
+            </li>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <div class="log-title">
+            <h1>Log In</h1>
+        </div>
+        <div class="log-form">
+            <form action="#" id="form-login">
+                <div class="form-items">
+                    <label for="email">E-mail</label>
+                    <input value="sophie.bluel@test.tld" type="email" id="email" name="email" required>
+                </div>
+                <div class="form-items">
+                    <label for="password">Mot de passe</label>
+                    <input value="S0phie" type="password" id="password" name="password" required>
+                </div>
+                <div class="form-bot">
+                    <button class="form-btn" type="submit">Se connecter</button>
+                    <p id="info-error">Les informations sont incorrect</p>
+                    <a href="#">Mot de passe oublié ?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <nav>
+        <ul>
+            <li><a href="#">Mentions légales</a></li>
+        </ul>
+    </nav>
+</footer>
+
+<script src="./assets/js/login.js" defer></script>
+</body>
+</html>
