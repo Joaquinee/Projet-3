@@ -1,6 +1,4 @@
 let form = document.getElementById('form-login');
-
-
 form.addEventListener('submit', async function(event) {
     event.preventDefault();
     let email = document.getElementById('email');

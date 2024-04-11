@@ -37,9 +37,9 @@
 
 
 <main>
-	<section id="introduction">
+	<div id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img src="./assets/images/sophie-bluel.png" alt="sophie-bluel">
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -47,33 +47,18 @@
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
-	</section>
+	</div>
 	<section id="portfolio">
 		<div class="project">
-			<h2>Mes Projets</h2>
-			<img src="./assets/icons/edite.png" alt="Edit" class="edit-mode">
-			<span class="edit-mode" onclick="openModal('edit')">modifier</span>
+			<h3>Mes Projets</h3>
+			<img src="./assets/icons/edite.png" alt="edite-img" class="edit-mode">
+			<span id="open-edit" class="edit-mode">modifier</span>
 		</div>
 		<div class="filtres">
 			<div class="flt-box">
-				<button id="all" class="flt-btn flt-active" onclick="filterWorks(0, 'all')">
+				<button id="all" class="flt-btn flt-active" data-category="">
 					<span class="flt-btn-text">
 						Tous
-					</span>
-				</button>
-				<button id="obj" class="flt-btn" onclick="filterWorks(1, 'obj')">
-					<span class="flt-btn-text">
-						Objets
-					</span>
-				</button>
-				<button id="apt" class="flt-btn" onclick="filterWorks(2, 'apt')">
-					<span class="flt-btn-text">
-						Appartements
-					</span>
-				</button>
-				<button id="hr" class="flt-btn" onclick="filterWorks(3, 'hr')">
-					<span class="flt-btn-text">
-						Hotels & restaurants
 					</span>
 				</button>
 			</div>
@@ -83,7 +68,7 @@
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
+		<form action="#" method="GET">
 			<label for="name">Nom</label>
 			<input type="text" name="name" id="name">
 			<label for="email">Email</label>
@@ -104,37 +89,36 @@
 </footer>
 
 <dialog id="edit">
-	<button onclick="window.edit.close();" aria-label="close" class="x">❌</button>
+	<button id="edit-close" aria-label="close" class="x">❌</button>
 	<h2>Galerie photo</h2>
 	<p id="return_delete"></p>
 	<div id="container-edit"></div>
 	<div class="seperator"></div>
 	<div class="modal-footer">
-		<button onclick="openModal('add'); window.edit.close()">
+		<button id="open-create">
 			Ajouter une photo
 		</button>
 	</div>
 </dialog>
 
 <dialog id="create">
-	<button onclick="window.create.close();window.edit.close();" aria-label="close" class="x">❌</button>
-	<img src="./assets/icons/back.png" onclick="window.create.close();openModal('edit')" class="bck">
+	<button id="all-close" ria-label="close" class="x">❌</button>
+	<img id="back-edit" src="./assets/icons/back.png" alt="open-modal" class="bck">
 	<h2>Ajout photo</h2>
 	<p id="return_add"></p>
 	<form id="form-create" action="#" method="post" enctype="multipart/form-data">
 			
 		<div class="box-image">
-				<img src="./assets/icons/img.png" alt="Image">
-				<label id="btn-photo" for="file">
-					<span>+ Ajouter photo</span>
-					<input type="file" id="file" accept="image/png, image/jpg" required>
-				</label>
-				<p id="text-img">jpg, png : 4mo max</p>
-			</div>
+			<img src="./assets/icons/img.png" alt="image-wait">
+			<label id="btn-photo" for="file">
+				<span>+ Ajouter photo</span>
+				<input type="file" id="file" accept="image/png, image/jpeg" required>
+			</label>
+			<p id="text-img">jpg, png : 4mo max</p>
 		</div>
 
-		<div id="preview" class="box-preview" onclick="resetImage()">
-			<img id="img-preview" src="./assets/images/appartement-paris-xviii.png" alt="Image">
+		<div id="preview" class="box-preview">
+			<img id="img-preview" src="./assets/images/appartement-paris-xviii.png" alt="image-preview">
 		</div>
 		
 		<div class="form-cors">
@@ -143,8 +127,9 @@
 		</div>
 		<div class="form-cors">
 			<label class="title-label" for="categorie">Catégorie</label>
-			<select name="categorie" id="categorie" class="form-input" type="text" required></select>
+			<select name="categorie" id="categorie" class="form-input"></select>
 		</div>
+		
 		<div class="seperator"></div>
 		<div class="modal-footer">
 			<button type="submit" id="btn-add" disabled>
@@ -156,6 +141,6 @@
 
 
 </dialog>
-<script src="./assets/js/main.js" defer></script>
+<script src="./assets/js/main.js"></script>
 </body>
 </html>

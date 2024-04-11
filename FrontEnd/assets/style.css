@@ -1,21 +1,5 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+/* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -24,8 +8,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -37,8 +20,7 @@ ol, ul {
 blockquote, q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: '';
 	content: none;
 }
@@ -47,17 +29,37 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-
+/* Barre de défilement */
+::-webkit-scrollbar {
+	width: 12px;
+  }
+  
+  /* Bouton flèche de défilement vers le haut et le bas */
+  ::-webkit-scrollbar-button {
+	background-color: #444;
+  }
+  
+  /* Piste de défilement (le fond) */
+  ::-webkit-scrollbar-track {
+	background-color: #333;
+  }
+  
+  /* Poignée de défilement */
+  ::-webkit-scrollbar-thumb {
+	background-color: #666;
+  }
+  
+  /* Poignée de défilement au survol */
+  ::-webkit-scrollbar-thumb:hover {
+	background-color: #888;
+  }
 
 * {
 	scroll-behavior: smooth;
-	
 }
 input[type="text"] {
 	outline: none;
 }
-
-
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -67,74 +69,70 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0 
 }
 section {
-	margin: 50px 0
+	margin: 50px 0 
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C 
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
-
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154 
+}
+h3{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154 
 }
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
-	&:hover {
-		color: #B1663C;
-	}
 }
-
-
+nav li:hover {
+	color: #B1663C;
+}
 #introduction {
 	display: flex;
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1 
 }
 #introduction img {
 	display: block;
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
-	flex: 1
+	flex: 1 
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
-
-
 .project {
 	display: flex;
 	flex-direction: row;
@@ -142,8 +140,6 @@ nav li {
 	align-items: center;
 	margin-bottom: 1em;
 }
-
-
 .project img {
 	margin-left: 10px;
 }
@@ -151,7 +147,6 @@ nav li {
 	margin-left: 5px;
 	cursor: pointer;
 }
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -160,18 +155,15 @@ nav li {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
-
 }
 #contact h2{
 	margin-bottom: 20px;
@@ -182,7 +174,6 @@ margin: auto;
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -196,7 +187,6 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -207,78 +197,67 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em 
 }
-
-
 /* Custom */
 a {
 	text-decoration: none;
 	color: black;
-	&:hover {
-		color: #B1663C;
-	}
 }
-
+a:hover {
+	color: #B1663C;
+}
 /* Filter */
 .filtres {
-    margin-bottom: auto;
-    display: flex;
-    flex-direction: row;
+	margin-bottom: auto;
+	display: flex;
+	flex-direction: row;
 	justify-content: center;
 }
 .flt-box {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 .flt-btn {
-    
-    background-color: white;
-    border: #1D6154 1px solid;
-    border-radius: 25px;
-    padding: 4px 19px 4px 19px;
-    height: 37px;
+	background-color: white;
+	border: #1D6154 1px solid;
+	border-radius: 25px;
+	padding: 4px 19px 4px 19px;
+	height: 37px;
 	cursor: pointer;
+	margin: 5px;
 }
 .flt-btn-text {
 	color: #1D6154;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 19.2px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 19.2px;
 }
 .flt-btn:hover {
-    background-color: #1D6154;
+	background-color: #1D6154;
 }
 .flt-btn:hover .flt-btn-text {
-    color: white;
+	color: white;
 }
 .flt-active {
 	background-color: #1D6154;
 	color: white;
-}	
+}
 .flt-active span{
 	color: white;
-}	
-
+}
 .active {
 	font-weight: bold;
 }
-
-
 /* Modal */
-
 /* Page de login */
-
-
 .container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	padding-top: 100px;
-
 }
 .log-title {
 	text-align: center;
@@ -301,7 +280,6 @@ a {
 	display: flex;
 	flex-direction: column;
 }
-
 .form-items input {
 	height: 51px;
 	width: 379px;
@@ -312,18 +290,17 @@ a {
 .form-items input:focus {
 	outline: none;
 }
-
 .form-bot {
 	display: flex;
 	flex-direction: column;
 	padding-top: 47px;
 }
-.form-btn  {
+.form-btn {
 	background-color: #1D6154;
 	color: white;
-    border-radius: 60px;
+	border-radius: 60px;
 	width: 179px;
-    height: 36px;
+	height: 36px;
 	cursor: pointer;
 }
 .form-bot a {
@@ -340,55 +317,51 @@ a {
 }
 .box-edit{
 	display: none;
-    background-color: black;
-    color: #fff; 
+	background-color: black;
+	color: #fff;
 	height: 59px;
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 .edit-mode {
 	display: none;
 }
 .text {
-    width: 100%;
-    display: flex; 
+	width: 100%;
+	display: flex;
 	flex-direction: row;
-    align-items: center; 
-    justify-content: center; 
-	padding: 19.5px 0px 19.5px 0px; 
-    margin: 0;
+	align-items: center;
+	justify-content: center;
+	padding: 19.5px 0px 19.5px 0px;
+	margin: 0;
 }
 .text p {
 	padding-left: 5px;
 	font-size: 16px;
 	line-height: 18px;
-	
 }
-
 .seperator {
 	height: 1px;
 	width: 75%;
 	background-color: #000000;
 	margin: 5% auto ;
 }
-
 .modal-footer {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	padding: 0px 0px 50px 0px;
-
-	button {
-		width: 35%;
-		height: 36px;
-		background-color: #1D6154;
-		color: white;
-		border: none;
-		border-radius: 60px;
-		cursor: pointer;
-	}
+}
+.modal-footer button {
+	width: 35%;
+	height: 36px;
+	background-color: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 60px;
+	cursor: pointer;
 }
 #btn-add {
 	background-color: #A7A7A7 !important;
@@ -396,7 +369,6 @@ a {
 #btn-add:enabled {
 	background-color: #1D6154 !important;
 }
-
 #preview {
 	display: none;
 }
@@ -406,262 +378,269 @@ a {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	  
-	&:hover {
-		border: 2px solid red;
-		filter: blur(2px);
-		cursor: pointer;
-	}
-	img {
-		position: relative;
-		width: 35%;
-		padding-top: 0 !important;
-	}
-	span {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);  
-		cursor: pointer; 
-	}
-
-
+}
+.box-preview:hover {
+	border: 2px solid red;
+	filter: blur(2px);
+	cursor: pointer;
+}
+.box-preview img {
+	position: relative;
+	width: 35%;
+	padding-top: 0 !important;
+}
+.box-preview span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+}
+.box-image {
+	height: 180px;
+	width: 75%;
+	background-color: #E8F1F6;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding-top: 10px;
+}
+.box-image p {
+	padding-top: 5px;
+}
+.btn-photo {
+	background-color: #CBD6DC;
+	color: white;
+	border: none;
+	border-radius: 60px;
+	cursor: pointer;
+	width: 40%;
+	height: 36px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.btn-photo span {
+	padding: 10px;
+	color: #306685;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.42px;
+}
+.btn-photo input {
+	display: none;
+}
+.form-cors {
+	display: flex;
+	flex-direction: column;
+	padding-top: 15px;
+	width: 75%;
+}
+.form-cors label {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.42px;
+	text-align: left;
+	color: #3D3D3D;
+}
+.form-cors .form-input {
+	margin-top: 10px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 dialog#create {
 	max-width: 630px;
 	width: 630px;
-	padding-top: 25%;
 	background: white;
-	padding-top: 2rem;
 	border-radius: 20px;
 	border: 0;
-	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+	box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
 	animation: fadeIn 1s ease both;
-	&::backdrop {
-		animation: fadeIn 1s ease both;
-		background: rgba(0, 0, 0, 0.4);
-		z-index: 2;
-		backdrop-filter: blur(1px);
-	}
-	.x {
-		filter: grayscale(1);
-		border: none;
-		background: none;
-		position: absolute;
-		top: 15px;
-		right: 10px;
-		cursor: pointer;
-		transform-origin: center;
-		&:hover {
-			filter: grayscale(0);
-			transform: scale(1.1);
-		}
-
-	}
-	.bck {
-
-		border: none;
-		background: none;
-		position: absolute;
-		top: 15px;
-		left: 10px;
-		cursor: pointer;
-		transform-origin: center;
-		&:hover {
-			transform: scale(1.1);
-		}
-
-	}
-	h2 {
-		width: 100%;
-		text-align: center;
-		color: #000000;
-		font-size: 26px;
-		font-weight: 400;
-		line-height: 30.5px;
-		padding-top: 16px;
-	}
-	#return_add {
-		width: 100%;
-		text-align: center;
-		color: red;
-		font-size: 25px;
-		font-weight: 400;
-		line-height: 30.5px;
-		padding-top: 16px;
-	}
-	
-	form {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		padding-top: 25px;
-	  }
-	  
-	  img {
-		padding-top: 10px;
-	  }
-	  
-	  .box-image {
-		height: 180px;
-		width: 75%;
-		background-color: #E8F1F6;
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-		padding-top: 10px;
-	  
-		p {
-		  padding-top: 5px;
-		}
-	  
-		#btn-photo {
-		  background-color: #CBD6DC;
-		  color: white;
-		  border: none;
-		  border-radius: 60px;
-		  cursor: pointer;
-		  width: 40%;
-		  height: 36px;
-		  cursor: pointer;
-		  display: flex;
-		  flex-direction: row;
-		  justify-content: center;
-	  
-		  span {
-			padding: 10px;
-			color: #306685;
-			font-family: Work Sans;
-			font-size: 14px;
-			font-weight: 500;
-			line-height: 16.42px;
-		  }
-	  
-		  input {
-			display: none;
-		  }
-		}
-
-		
-	  }
-	 
-	.form-cors {
-		display: flex;
-		flex-direction: column;
-		padding-top: 15px;
-		width: 75%;
-
-		label {
-			font-family: Work Sans;
-			font-size: 14px;
-			font-weight: 500;
-			line-height: 16.42px;
-			text-align: left;
-			color: #3D3D3D ;
-			
-		}
-		.form-input {
-			margin-top: 10px;
-			height: 51px;
-			border : none;
-			box-shadow:0px 4px 14px rgba(0, 0, 0, 0.09); 
-		
-		}
-
-		
-	}
-
-	
+	padding-top: 2rem;
+}
+dialog#create::backdrop {
+	animation: fadeIn 1s ease both;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 2;
+	backdrop-filter: blur(1px);
+}
+dialog#create .x {
+	filter: grayscale(1);
+	border: none;
+	background: none;
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	cursor: pointer;
+	transform-origin: center;
+}
+dialog#create .x:hover {
+	filter: grayscale(0);
+	transform: scale(1.1);
+}
+dialog#create .bck {
+	border: none;
+	background: none;
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	cursor: pointer;
+	transform-origin: center;
+}
+dialog#create .bck:hover {
+	transform: scale(1.1);
+}
+dialog#create h2 {
+	width: 100%;
+	text-align: center;
+	color: #000000;
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 30.5px;
+	padding-top: 16px;
+}
+dialog#create #return_add {
+	width: 100%;
+	text-align: center;
+	padding-top: 16px;
+}
+dialog#create form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 25px;
+}
+dialog#create .box-image {
+	background-color: #E8F1F6;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding-top: 10px;
+}
+dialog#create .box-image p {
+	padding-top: 5px;
+}
+dialog#create .box-image #btn-photo {
+	background-color: #CBD6DC;
+	color: white;
+	border: none;
+	border-radius: 60px;
+	cursor: pointer;
+	width: 40%;
+	height: 36px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+dialog#create .box-image #btn-photo span {
+	padding: 10px;
+	color: #306685;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.42px;
+}
+dialog#create .box-image #btn-photo input {
+	display: none;
+}
+dialog#create .form-cors {
+	display: flex;
+	flex-direction: column;
+	padding-top: 15px;
+	width: 75%;
+}
+dialog#create .form-cors label {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16.42px;
+	text-align: left;
+	color: #3D3D3D;
+}
+dialog#create .form-cors .form-input {
+	margin-top: 10px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 dialog#edit {
 	max-width: 630px;
 	width: 630px;
-	padding-top: 25%;
 	background: white;
-	padding-top: 2rem;
 	border-radius: 20px;
 	border: 0;
-	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+	box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
 	animation: fadeIn 1s ease both;
-	&::backdrop {
-		animation: fadeIn 1s ease both;
-		background: rgba(0, 0, 0, 0.4);
-		z-index: 2;
-		backdrop-filter: blur(1px);
-	}
-	.x {
-		filter: grayscale(1);
-		border: none;
-		background: none;
-		position: absolute;
-		top: 15px;
-		right: 10px;
-		cursor: pointer;
-		transform-origin: center;
-		&:hover {
-			filter: grayscale(0);
-			transform: scale(1.1);
-		}
-
-	}
-	
-	h2 {
-		width: 100%;
-		text-align: center;
-		color: #000000;
-		font-size: 26px;
-		font-weight: 400;
-		line-height: 30.5px;
-		padding-top: 60px;
-	}
-	p {
-		width: 100%;
-		text-align: center;
-		font-size: 16px;
-		line-height: 18px;
-		padding-top: 20px;
-	
-	}
-	#container-edit {
-		padding-top: 50px;
-		padding-left: 50px;
-		width: auto;
-		gap: 10px;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-	  }
-	.box-edt {
-		position: relative;
-		width: calc(20%); 
-	}
-	.box-edt img {
-		width: 100%;
-	}
-	.delete-icon {
-		position: absolute;
-		top: 5px;
-		right: 5px; 
-		font-size: 16px;
-		cursor: pointer;
-
-		img {
-			height: 20px;
-			width: 20px;
-		}
-	}
-	
-	
-	
-	
+	padding-top: 2rem;
 }
-
+dialog#edit::backdrop {
+	animation: fadeIn 1s ease both;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 2;
+	backdrop-filter: blur(1px);
+}
+dialog#edit .x {
+	filter: grayscale(1);
+	border: none;
+	background: none;
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	cursor: pointer;
+	transform-origin: center;
+}
+dialog#edit .x:hover {
+	filter: grayscale(0);
+	transform: scale(1.1);
+}
+dialog#edit h2 {
+	width: 100%;
+	text-align: center;
+	color: #000000;
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 30.5px;
+	padding-top: 60px;
+}
+dialog#edit p {
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	line-height: 18px;
+	padding-top: 20px;
+}
+dialog#edit #container-edit {
+	padding-top: 50px;
+	padding-left: 50px;
+	width: auto;
+	gap: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+dialog#edit .box-edt {
+	position: relative;
+	width: calc(20%);
+}
+dialog#edit .box-edt img {
+	width: 100%;
+}
+dialog#edit .delete-icon {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 16px;
+	cursor: pointer;
+}
+dialog#edit .delete-icon img {
+	height: 20px;
+	width: 20px;
+}
 @keyframes fadeIn {
 	from {
 		opacity: 0;
-	}
+   }
 	to {
 		opacity: 1;
-	}
+   }
 }
