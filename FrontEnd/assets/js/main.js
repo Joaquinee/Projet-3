@@ -241,6 +241,9 @@ const setupModalEdit = async () => {
         let succes = document.getElementById('return_add');
         succes.style.cssText = "color: green;";
         succes.innerHTML = "Le projet a été ajouté avec succès";
+        newCats = false;
+        document.getElementById('new-cat').remove();
+        select.disabled = false;
         document.getElementById('form-create').reset();
         document.getElementsByClassName('box-image')[0].style.display = "flex";
         document.getElementById('preview').style.display = "none";
