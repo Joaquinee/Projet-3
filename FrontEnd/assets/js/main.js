@@ -217,6 +217,7 @@ const setupModalEdit = async () => {
 
                 let res = await response.json();
                 categoryId = res.id;
+                allCategories.push(res);
             }).catch((error) => {
                 console.error('Erreur :', error);
                 return;
