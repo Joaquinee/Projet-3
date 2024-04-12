@@ -15,7 +15,7 @@ form.addEventListener('submit', async function(event) {
         error_p.style.display = "block";
         email.classList.add('error');
         password.classList.add('error');
-        error_p.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+        error_p.innerText = "Erreur dans l’identifiant ou le mot de passe";
         return;
     }
     if (req.status === 200) {

@@ -35,12 +35,12 @@ async function displayCats() {
                 let btn = document.createElement('button');
                 btn.dataset.category = category.id;
                 btn.classList.add('flt-btn');
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', () => {
                     filterWorks(category.id);
                 })
                 let title = document.createElement('span');
                 title.classList.add('flt-btn-text');
-                title.innerHTML = category.name;
+                title.innerText = category.name;
                 btn.appendChild(title);
                 document.querySelector(".flt-box").appendChild(btn)
             });
@@ -68,18 +68,24 @@ document.getElementById('preview').addEventListener('click', function() {
 
 const setupPages = (works) => {
     const worksContainer = document.querySelector(".gallery");
-    worksContainer.innerHTML = "";
+    worksContainer.innerText = "";
     if (works.length === 0) {
-        worksContainer.innerHTML = "Aucun projet de cette catégorie n'est publié";
+        worksContainer.innerText = "Aucun projet de cette catégorie n'est publié";
         return;
     }
     works.forEach((work) => {
         const workElement = document.createElement("figure");
         workElement.setAttribute('data-category', work.categoryId);
-        workElement.innerHTML = `
-            <img src="${work.imageUrl}" alt="${work.title}">
-            <figcaption>${work.title}</figcaption>
-        `;
+        let setupImg = document.createElement('img');
+        setupImg.src = work.imageUrl;
+        setupImg.alt = work.title;
+        workElement.appendChild(setupImg);
+
+        let setumFig = document.createElement('figcaption');
+        setumFig.innerText = work.title;
+        workElement.appendChild(setumFig);
+
+    
         worksContainer.appendChild(workElement);
     });
 };
@@ -110,8 +116,8 @@ document.getElementById('file').addEventListener('change', function(event) {
     const file = event.target.files[0];
     const error = document.getElementById('return_add');
     if (file.size > 4 * 1024 * 1024) { 
-        error.style.cssText = "color: red;";
-        error.innerHTML = "L'image doit être inférieure à 4 Mo";
+        error.classList.add('red');
+        error.innerText = "L'image doit être inférieure à 4 Mo";
         return;
     }
     document.getElementsByClassName('box-image')[0].style.display = "none";
@@ -124,7 +130,7 @@ document.getElementById('file').addEventListener('change', function(event) {
 });
 const setupModalEdit = async () => {
     let select = document.getElementById('categorie');
-    select.innerHTML = "";
+    select.innerText = "";
 
     select.addEventListener('change', function(e) {
         if (e.target.value == "new") {
@@ -138,6 +144,8 @@ const setupModalEdit = async () => {
             newCat.classList.add('form-input')
             select.parentNode.appendChild(newCat);
             select.disabled = true;
+            checkChangeInput();
+
         } else {
             newCats = false;
             document.getElementById('new-cat').remove();
@@ -145,6 +153,7 @@ const setupModalEdit = async () => {
         }
             
     });
+
     allCategories.forEach(category => {
         let option = document.createElement('option');
         option.value = category.id;
@@ -157,7 +166,9 @@ const setupModalEdit = async () => {
     newCats.value = "new";
     select.appendChild(newCats);
 
+
     const btn = document.getElementById('btn-add');
+
     checkChangeInput();
     function checkInputs() {
 
@@ -167,6 +178,7 @@ const setupModalEdit = async () => {
         } else {
             allInputs = document.querySelectorAll('form#form-create input, form#form-create select');
         }
+    
         let allFilled = true;
         for (const input of allInputs) {
             if (!input.value.trim()) {
@@ -179,12 +191,8 @@ const setupModalEdit = async () => {
     }
     function checkChangeInput() {
         let allInputs;
-        if (newCats) {
-            allInputs = document.querySelectorAll('form#form-create input');
-        } else {
-            allInputs = document.querySelectorAll('form#form-create input, form#form-create select');
-        }
-
+        allInputs = document.querySelectorAll('form#form-create input, form#form-create select');
+        console.log(allInputs)
         for (const input of allInputs) {
             input.addEventListener('change', checkInputs);
         }
@@ -240,8 +248,8 @@ const setupModalEdit = async () => {
             body: formData,
     }).then(async (response) => {
         let succes = document.getElementById('return_add');
-        succes.style.cssText = "color: green;";
-        succes.innerHTML = "Le projet a été ajouté avec succès";
+        succes.classList.add('green');
+        succes.innerText = "Le projet a été ajouté avec succès";
         newCats = false;
         let select = document.getElementById('categorie');
         document.getElementById('new-cat').remove();
@@ -263,21 +271,37 @@ const setupModalEdit = async () => {
 };
 const setupModal = async () => {
     const editContainer = document.getElementById("container-edit");
-    editContainer.innerHTML = "";
+    editContainer.innerText = "";
     if (allWorks.length === 0) {
-        editContainer.innerHTML = "Aucune photo n'est publié";
+        editContainer.innerText = "Aucune photo n'est publié";
         return;
     }
     allWorks.forEach((work) => {
+       
         const element = document.createElement("div");
         element.classList.add("box-edt");
-        element.innerHTML = `
-            <img src="${work.imageUrl}" alt="${work.title}">
-            <span class="delete-icon">
-                <img src="./assets/icons/delete.png" alt="delete" onclick="deleteWork(${work.id})">
-            </span>
-        `;
+
+        let modalImg = document.createElement('img')
+        modalImg.src = work.imageUrl;
+        modalImg.alt = work.title;
+
+        let modalSpan = document.createElement('span')
+        modalSpan.classList.add('delete-icon');
+
+        let spanModalImg = document.createElement('img');
+        spanModalImg.src = "./assets/icons/delete.png";
+        spanModalImg.alt = "delete";
+        spanModalImg.addEventListener('click', function() {
+                deleteWork(work.id);
+        });
+     
+        modalSpan.appendChild(spanModalImg);
+        element.appendChild(modalImg)
+        element.appendChild(modalSpan)
+
         editContainer.appendChild(element); // Ajouter l'élément de travail à la galerie
+
+      
     });
 }
 
@@ -287,11 +311,11 @@ const deleteWork = async (id) => {
     const token = localStorage.getItem('token');
     let p_message = document.getElementById('return_delete');
     if (!allWorks.find((work) => work.id === id)) {
-        p_message.style.cssText = "color: red;";
-        p_message.innerHTML = "Une erreur est survenue lors de la suppression du projet"; 
+        p_message.classList.add('red');
+        p_message.innerText = "Une erreur est survenue lors de la suppression du projet"; 
         return;
     }
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    await fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -303,11 +327,11 @@ const deleteWork = async (id) => {
             allWorks = last;
             setupModal()
             setupPages(allWorks);
-            p_message.style.cssText = "color: green;";
-            p_message.innerHTML = "Le projet a été supprimé avec succès"; 
+            p_message.classList.add('green');
+            p_message.innerText = "Le projet a été supprimé avec succès"; 
         } else {
-            p_message.style.cssText = "color: red;";
-            p_message.innerHTML = "Une erreur est survenue lors de la suppression du projet"; 
+            p_message.classList.add('red');
+            p_message.innerText = "Une erreur est survenue lors de la suppression du projet"; 
         }
     });
 }
@@ -349,13 +373,14 @@ const openModal = async (type) => {
 };
 
 if (localStorage.getItem('token')) {
-    document.getElementById('sign').innerHTML = "logout";
+    document.getElementById('sign').innerText = "logout";
     document.getElementsByClassName('filtres')[0].style.display = "none";
     let all_edit = document.getElementsByClassName('edit-mode');
     for(var i = 0; i < all_edit.length; i++) {
         all_edit[i].style.display = "block";
     }
     let baseHeaders = document.querySelector('header');
-    baseHeaders.style.cssText = "padding-top : 38px !important;";
+    baseHeaders.classList.add('pad-top');
+
    
 }
