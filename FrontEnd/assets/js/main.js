@@ -1,17 +1,18 @@
 let allWorks = [];
 let allCategories = [];
 let sign = document.getElementById('sign');
-let newCats = false;
+let newCat = false;
 init();
 
 
+
+/**
+ * Fonction d'initialisation de la page
+ */
 async function init() {
-   await  getWorks();
+    await getWorks();
     await displayCats();
 }
-/**
- * @returns {Promise<Array>} works
- */
 async function getWorks() {
     try {
         const response = await fetch("http://localhost:5678/api/works");
@@ -25,29 +26,32 @@ async function getWorks() {
     }
 }
 /**
- * @returns {Promise<Array>} categories
+ * Fonction pour afficher les catégories
  */
 async function displayCats() {
-    await fetch("http://localhost:5678/api/categories").then( async (response) => {
-            const categories = await response.json();
-            categories.forEach((category) => {
-                allCategories.push(category);
-                let btn = document.createElement('button');
-                btn.dataset.category = category.id;
-                btn.classList.add('flt-btn');
-                btn.addEventListener('click', () => {
-                    filterWorks(category.id);
-                })
-                let title = document.createElement('span');
-                title.classList.add('flt-btn-text');
-                title.innerText = category.name;
-                btn.appendChild(title);
-                document.querySelector(".flt-box").appendChild(btn)
-            });
+    await fetch("http://localhost:5678/api/categories").then(async (response) => {
+        const categories = await response.json();
+        categories.forEach((category) => {
+            allCategories.push(category);
+            let btn = document.createElement('button');
+            btn.dataset.category = category.id;
+            btn.classList.add('flt-btn');
+            btn.addEventListener('click', () => {
+                filterWorks(category.id);
+            })
+            let title = document.createElement('span');
+            title.classList.add('flt-btn-text');
+            title.innerText = category.name;
+            btn.appendChild(title);
+            document.querySelector(".flt-box").appendChild(btn)
+        });
     }).catch((error) => {
         alert(error);
     });
 }
+/**
+ * Fonction pour se connecter ou se déconnecter
+ */
 sign.addEventListener('click', async function(event) {
     event.preventDefault();
     if (localStorage.getItem('token')) {
@@ -60,12 +64,20 @@ sign.addEventListener('click', async function(event) {
     }
 });
 
+/**
+ * Fonction pour afficher l'image
+ */
 document.getElementById('preview').addEventListener('click', function() {
     document.getElementsByClassName('box-image')[0].style.display = "flex";
     document.getElementById('preview').style.display = "none";
 })
 
 
+/**
+ * Function pour chargr les works
+ * @param {*} works 
+ * @returns 
+ */
 const setupPages = (works) => {
     const worksContainer = document.querySelector(".gallery");
     worksContainer.innerText = "";
@@ -85,10 +97,32 @@ const setupPages = (works) => {
         setumFig.innerText = work.title;
         workElement.appendChild(setumFig);
 
-    
+
         worksContainer.appendChild(workElement);
     });
 };
+
+/**
+ * Function pour ajouter une catégorie au dom
+ * @param {*} category 
+ */
+const addCat = async (category) => {
+    let btn = document.createElement('button');
+    btn.dataset.category = category.id;
+    btn.classList.add('flt-btn');
+    btn.addEventListener('click', () => {
+        filterWorks(category.id);
+    })
+    let title = document.createElement('span');
+    title.classList.add('flt-btn-text');
+    title.innerText = category.name;
+    btn.appendChild(title);
+    document.querySelector(".flt-box").appendChild(btn)
+}
+/**
+ * Function pour filtrer les works
+ * @param {*} id 
+ */
 const filterWorks = (id) => {
     const allBtn = document.querySelectorAll('.flt-btn');
     allBtn.forEach((btn) => {
@@ -112,10 +146,14 @@ const filterWorks = (id) => {
         });
     });
 };
+
+/**
+ * Function qui gere l'ajout de l'image
+ */
 document.getElementById('file').addEventListener('change', function(event) {
     const file = event.target.files[0];
     const error = document.getElementById('return_add');
-    if (file.size > 4 * 1024 * 1024) { 
+    if (file.size > 4 * 1024 * 1024) {
         error.classList.add('red');
         error.innerText = "L'image doit être inférieure à 4 Mo";
         return;
@@ -124,16 +162,20 @@ document.getElementById('file').addEventListener('change', function(event) {
     document.getElementById('preview').style.display = "flex";
     const reader = new FileReader();
     reader.onload = function(e) {
-        document.getElementById('img-preview').src = e.target.result; 
+        document.getElementById('img-preview').src = e.target.result;
     };
     reader.readAsDataURL(file);
 });
+
+/**
+ * Function qui génére le modal pour crée un Work
+ */
 const setupModalEdit = async () => {
     let select = document.getElementById('categorie');
     select.innerText = "";
-
     select.addEventListener('change', function(e) {
         if (e.target.value == "new") {
+            console.log(e.target.value)
             newCats = true;
             let newCat = document.createElement('input');
             newCat.type = "text";
@@ -147,58 +189,67 @@ const setupModalEdit = async () => {
             checkChangeInput();
 
         } else {
-            newCats = false;
-            document.getElementById('new-cat').remove();
+            newCat = false;
+            if (document.getElementById('new-cat')) {
+                document.getElementById('new-cat').remove();
+            }
             select.disabled = false;
         }
-            
     });
-
     allCategories.forEach(category => {
         let option = document.createElement('option');
         option.value = category.id;
         option.text = category.name;
         select.appendChild(option);
-    }); 
-
+    });
     let newCats = document.createElement('option');
     newCats.text = "Nouveau ..";
     newCats.value = "new";
     select.appendChild(newCats);
-
-
     const btn = document.getElementById('btn-add');
-
     checkChangeInput();
+
+
+    /**
+     * Function pour vérifier les inputs
+     * @returns 
+     */
     function checkInputs() {
 
         let allInputs;
-        if (newCats) {
+        if (newCat) {
             allInputs = document.querySelectorAll('form#form-create input');
         } else {
             allInputs = document.querySelectorAll('form#form-create input, form#form-create select');
         }
-    
+
         let allFilled = true;
         for (const input of allInputs) {
             if (!input.value.trim()) {
-            allFilled = false;
-            break;
+                allFilled = false;
+                break;
             }
         }
         btn.disabled = !allFilled;
         return allFilled;
     }
+
+    /**
+     * Function pour vérifier les changements des inputs
+     */
     function checkChangeInput() {
         let allInputs;
         allInputs = document.querySelectorAll('form#form-create input, form#form-create select');
-        console.log(allInputs)
         for (const input of allInputs) {
             input.addEventListener('change', checkInputs);
         }
     }
+
+    /**
+     * Function pour ajouter un work
+     */
     btn.addEventListener('click', async function(event) {
-      event.preventDefault();
+        event.preventDefault();
         if (!checkInputs()) {
             return;
         }
@@ -207,13 +258,11 @@ const setupModalEdit = async () => {
         let categoryId = document.getElementById('categorie').value;
         const token = localStorage.getItem('token');
 
-        if (newCats) {
+        if (newCat) {
             let name = document.getElementById('new-cat').value;
-            
-            
             const cat = new FormData();
             cat.append('name', name);
-           
+
             await fetch("http://localhost:5678/api/categories", {
                 method: 'POST',
                 headers: {
@@ -226,19 +275,17 @@ const setupModalEdit = async () => {
                 let res = await response.json();
                 categoryId = res.id;
                 allCategories.push(res);
+                addCat(res)
             }).catch((error) => {
                 console.error('Erreur :', error);
                 return;
             });
-        
-            
-        };  
-       
+        };
         const formData = new FormData();
         formData.append('title', title);
         formData.append('image', file);
         formData.append('category', categoryId);
-        
+
         const req = await fetch("http://localhost:5678/api/works", {
             method: 'POST',
             headers: {
@@ -246,29 +293,35 @@ const setupModalEdit = async () => {
                 'Authorization': 'Bearer ' + token,
             },
             body: formData,
-    }).then(async (response) => {
-        let succes = document.getElementById('return_add');
-        succes.classList.add('green');
-        succes.innerText = "Le projet a été ajouté avec succès";
-        newCats = false;
-        let select = document.getElementById('categorie');
-        document.getElementById('new-cat').remove();
-        select.disabled = false;
-        document.getElementById('form-create').reset();
-        document.getElementsByClassName('box-image')[0].style.display = "flex";
-        document.getElementById('preview').style.display = "none";
-        document.getElementById('btn-add').disabled = true;
-        const res = await response.json();
+        }).then(async (response) => {
+            let succes = document.getElementById('return_add');
+            succes.classList.add('green');
+            succes.innerText = "Le projet a été ajouté avec succès";
+            newCat = false;
+            let select = document.getElementById('categorie');
+            if (document.getElementById('new-cat')) {
+                document.getElementById('new-cat').remove();
+            };
+            select.disabled = false;
+            document.getElementById('form-create').reset();
+            document.getElementsByClassName('box-image')[0].style.display = "flex";
+            document.getElementById('preview').style.display = "none";
+            document.getElementById('btn-add').disabled = true;
+            const res = await response.json();
             allWorks.push({
                 id: res.id,
                 title: title,
                 imageUrl: res.imageUrl,
                 categoryId: categoryId
-                });
-            setupPages(allWorks);
             });
+            setupPages(allWorks);
         });
+    });
 };
+/**
+ * Function pour ouvrir & gerer le modal de modification
+ * @returns 
+ */
 const setupModal = async () => {
     const editContainer = document.getElementById("container-edit");
     editContainer.innerText = "";
@@ -277,7 +330,7 @@ const setupModal = async () => {
         return;
     }
     allWorks.forEach((work) => {
-       
+
         const element = document.createElement("div");
         element.classList.add("box-edt");
 
@@ -292,27 +345,28 @@ const setupModal = async () => {
         spanModalImg.src = "./assets/icons/delete.png";
         spanModalImg.alt = "delete";
         spanModalImg.addEventListener('click', function() {
-                deleteWork(work.id);
+            deleteWork(work.id);
         });
-     
         modalSpan.appendChild(spanModalImg);
         element.appendChild(modalImg)
         element.appendChild(modalSpan)
 
         editContainer.appendChild(element); // Ajouter l'élément de travail à la galerie
-
-      
     });
 }
 
 
-
+/**
+ * Function pour supprimer un work
+ * @param {*} id 
+ * @returns 
+ */
 const deleteWork = async (id) => {
     const token = localStorage.getItem('token');
     let p_message = document.getElementById('return_delete');
     if (!allWorks.find((work) => work.id === id)) {
         p_message.classList.add('red');
-        p_message.innerText = "Une erreur est survenue lors de la suppression du projet"; 
+        p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
         return;
     }
     await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -320,43 +374,43 @@ const deleteWork = async (id) => {
         headers: {
             'Authorization': 'Bearer ' + token,
         },
-    }).then( async (response) => {
-        
+    }).then(async (response) => {
+
         if (response.status == 204) {
             let last = allWorks.filter((work) => work.id !== id);
             allWorks = last;
             setupModal()
             setupPages(allWorks);
             p_message.classList.add('green');
-            p_message.innerText = "Le projet a été supprimé avec succès"; 
+            p_message.innerText = "Le projet a été supprimé avec succès";
         } else {
             p_message.classList.add('red');
-            p_message.innerText = "Une erreur est survenue lors de la suppression du projet"; 
+            p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
         }
     });
 }
-
-//TODO
-document.getElementById('edit-close').addEventListener('click',  function() {
+document.getElementById('edit-close').addEventListener('click', function() {
     window.edit.close();
 });
-document.getElementById('all-close').addEventListener('click',  function() {
+document.getElementById('all-close').addEventListener('click', function() {
     window.create.close();
     window.edit.close();
 });
-document.getElementById('back-edit').addEventListener('click',  function() {
+document.getElementById('back-edit').addEventListener('click', function() {
     window.create.close();
     openModal('edit');
 });
-document.getElementById('open-edit').addEventListener('click',  function() {
+document.getElementById('open-edit').addEventListener('click', function() {
     openModal('edit');
 })
-
-document.getElementById('open-create').addEventListener('click',  function() {
+document.getElementById('open-create').addEventListener('click', function() {
     openModal('add');
     window.edit.close()
 })
-
+/**
+ * Function pour ouvrir un modal défini
+ * @param {*} type 
+ */
 const openModal = async (type) => {
     switch (type) {
         case 'add':
@@ -371,16 +425,18 @@ const openModal = async (type) => {
             break;
     }
 };
-
+/**
+ * Gestion du token localStorage
+ */
 if (localStorage.getItem('token')) {
     document.getElementById('sign').innerText = "logout";
     document.getElementsByClassName('filtres')[0].style.display = "none";
     let all_edit = document.getElementsByClassName('edit-mode');
-    for(var i = 0; i < all_edit.length; i++) {
+    for (var i = 0; i < all_edit.length; i++) {
         all_edit[i].style.display = "block";
     }
     let baseHeaders = document.querySelector('header');
     baseHeaders.classList.add('pad-top');
 
-   
+
 }
