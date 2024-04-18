@@ -276,7 +276,7 @@ const setupModalEdit = async () => {
                 let res = await response.json();
                 categoryId = res.id;
                 allCategories.push(res);
-                
+
                 addCat(res)
             }).catch((error) => {
                 console.error('Erreur :', error);
@@ -288,7 +288,7 @@ const setupModalEdit = async () => {
         formData.append('image', file);
         formData.append('category', categoryId);
 
-        const req = await fetch("http://localhost:5678/api/works", {
+        await fetch("http://localhost:5678/api/works", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
