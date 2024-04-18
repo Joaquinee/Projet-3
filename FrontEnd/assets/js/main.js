@@ -156,6 +156,7 @@ document.getElementById('file').addEventListener('change', function(event) {
     if (file.size > 4 * 1024 * 1024) {
         error.classList.add('red');
         error.innerText = "L'image doit être inférieure à 4 Mo";
+        setTimeout(() => {error.innerText = "";}, 10000);
         return;
     }
     document.getElementsByClassName('box-image')[0].style.display = "none";
@@ -176,15 +177,15 @@ const setupModalEdit = async () => {
     select.addEventListener('change', function(e) {
         if (e.target.value == "new") {
             console.log(e.target.value)
-            newCats = true;
-            let newCat = document.createElement('input');
-            newCat.type = "text";
-            newCat.placeholder = "Nouvelle catégorie";
-            newCat.id = "new-cat";
-            newCat.name = "new-cat";
-            newCat.required = true;
-            newCat.classList.add('form-input')
-            select.parentNode.appendChild(newCat);
+            newCat = true;
+            let cat = document.createElement('input');
+            cat.type = "text";
+            cat.placeholder = "Nouvelle catégorie";
+            cat.id = "new-cat";
+            cat.name = "new-cat";
+            cat.required = true;
+            cat.classList.add('form-input')
+            select.parentNode.appendChild(cat);
             select.disabled = true;
             checkChangeInput();
 
@@ -275,6 +276,7 @@ const setupModalEdit = async () => {
                 let res = await response.json();
                 categoryId = res.id;
                 allCategories.push(res);
+                
                 addCat(res)
             }).catch((error) => {
                 console.error('Erreur :', error);
@@ -297,6 +299,7 @@ const setupModalEdit = async () => {
             let succes = document.getElementById('return_add');
             succes.classList.add('green');
             succes.innerText = "Le projet a été ajouté avec succès";
+            setTimeout(() => {succes.innerText = "";}, 10000);
             newCat = false;
             let select = document.getElementById('categorie');
             if (document.getElementById('new-cat')) {
@@ -327,6 +330,7 @@ const setupModal = async () => {
     editContainer.innerText = "";
     if (allWorks.length === 0) {
         editContainer.innerText = "Aucune photo n'est publié";
+
         return;
     }
     allWorks.forEach((work) => {
@@ -365,8 +369,11 @@ const deleteWork = async (id) => {
     const token = localStorage.getItem('token');
     let p_message = document.getElementById('return_delete');
     if (!allWorks.find((work) => work.id === id)) {
+       
         p_message.classList.add('red');
         p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
+        setTimeout(() => {p_message.innerText = "";}, 10000);
+    
         return;
     }
     await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -387,6 +394,8 @@ const deleteWork = async (id) => {
             p_message.classList.add('red');
             p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
         }
+
+        setTimeout(() => {p_message.innerText = "";}, 10000);
     });
 }
 document.getElementById('edit-close').addEventListener('click', function() {
