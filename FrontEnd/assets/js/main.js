@@ -156,7 +156,7 @@ document.getElementById('file').addEventListener('change', function(event) {
     if (file.size > 4 * 1024 * 1024) {
         error.classList.add('red');
         error.innerText = "L'image doit être inférieure à 4 Mo";
-        setTimeout(() => {error.innerText = "";}, 10000);
+        setTimeout(() => {error.innerText = "";}, 4000);
         return;
     }
     document.getElementsByClassName('box-image')[0].style.display = "none";
@@ -299,7 +299,7 @@ const setupModalEdit = async () => {
             let succes = document.getElementById('return_add');
             succes.classList.add('green');
             succes.innerText = "Le projet a été ajouté avec succès";
-            setTimeout(() => {succes.innerText = "";}, 10000);
+            setTimeout(() => {succes.innerText = "";}, 4000);
             newCat = false;
             let select = document.getElementById('categorie');
             if (document.getElementById('new-cat')) {
@@ -372,7 +372,7 @@ const deleteWork = async (id) => {
        
         p_message.classList.add('red');
         p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
-        setTimeout(() => {p_message.innerText = "";}, 10000);
+        setTimeout(() => {p_message.innerText = "";}, 4000);
     
         return;
     }
@@ -395,7 +395,7 @@ const deleteWork = async (id) => {
             p_message.innerText = "Une erreur est survenue lors de la suppression du projet";
         }
 
-        setTimeout(() => {p_message.innerText = "";}, 10000);
+        setTimeout(() => {p_message.innerText = "";}, 4000);
     });
 }
 document.getElementById('edit-close').addEventListener('click', function() {
